@@ -47,23 +47,30 @@
         </div>
       </div>
       <div class="bg-white py-16 px-4 sm:px-6 lg:col-span-3 lg:py-24 lg:px-8 xl:pl-12">
+        {{ if {session:has key="errors"} }}
+          <p class="p-4 bg-red-100 text-red-800 rounded shadow-sm mb-5 text-sm">Prišlo je do napake. Prosimo, da poizkusite ponovno.</p>
+        {{ /if }}
+        {{ if {session:has key="success"} }}
+          <p class="p-4 bg-green-100 text-green-800 rounded shadow-sm mb-5 text-sm">Sporočilo uspešno poslano. Odgovorili vam bomo v najkrajšem možnem času.</p>
+        {{ /if }}
         <div class="max-w-lg mx-auto lg:max-w-none">
-          <form action="#" method="POST" class="grid grid-cols-1 gap-y-6">
+          <form action="/contact" method="POST" class="grid grid-cols-1 gap-y-6">
+            {{ csrf_field }}
             <div>
-              <label for="full-name" class="sr-only">Ime in priimek</label>
-              <input type="text" name="full-name" id="full-name" autocomplete="name" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border-gray-300 rounded-md" placeholder="Ime in priimek">
+              <label for="name" class="sr-only">Ime in priimek *</label>
+              <input required type="text" name="name" id="name" value="{{ old:name }}" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border-gray-300 rounded-md" placeholder="Ime in priimek">
             </div>
             <div>
               <label for="email" class="sr-only">Email *</label>
-              <input id="email" name="email" type="email" autocomplete="email" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border-gray-300 rounded-md" placeholder="Email">
+              <input required id="email" name="email" type="email" value="{{ old:email }}" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border-gray-300 rounded-md" placeholder="Email">
             </div>
             <div>
               <label for="phone" class="sr-only">Telefon *</label>
-              <input type="text" name="phone" id="phone" autocomplete="tel" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border-gray-300 rounded-md" placeholder="Telefon">
+              <input required type="text" name="phone" id="phone" value="{{ old:phone }}" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border-gray-300 rounded-md" placeholder="Telefon">
             </div>
             <div>
-              <label for="message" class="sr-only">Vaše sporočilo oz. vprašanje</label>
-              <textarea id="message" name="message" rows="4" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border border-gray-300 rounded-md" placeholder="Vaše sporočilo oz. vprašanje"></textarea>
+              <label for="message" class="sr-only">Vaše sporočilo oz. vprašanje *</label>
+              <textarea required id="message" name="message" rows="4" class="block w-full shadow-sm py-3 px-4 placeholder-gray-500 focus:ring-green-500 focus:border-green-500 border border-gray-300 rounded-md" placeholder="Vaše sporočilo oz. vprašanje">{{ old:message }}</textarea>
             </div>
             <div>
               <button type="submit" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Pošlji obrazec</button>
