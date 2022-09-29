@@ -1,1 +1,4 @@
 /* This is all you. */
+#profili ul {
+    @apply list-disc
+}

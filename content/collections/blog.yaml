@@ -1,0 +1,9 @@
+title: Blog
+template: blog/show
+layout: layout
+revisions: false
+route: '/novice/{slug}'
+sort_dir: asc
+date_behavior:
+  past: public
+  future: private

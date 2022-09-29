@@ -5,12 +5,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{{ title ?? site:name }}</title>
+        <script src="https://kit.fontawesome.com/1f22afa57b.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.tailwindcss.com/?plugins=forms,typography,aspect-ratio,line-clamp"></script>
         <link rel="stylesheet" href="{{ mix src='css/tailwind.css' }}">
+        <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     </head>
-    <body class="bg-gray-100 font-sans leading-normal text-gray-800">
-        <div class="mx-auto px-2 h-screen flex items-center justify-center">
-            {{ template_content }}
-        </div>
+    <body class="bg-white font-sans leading-normal text-gray-800">
+        {{ partial:header }}
+        {{ template_content }}
+        {{ partial:footer }}
+        <script defer src="https://unpkg.com/alpinejs@3.9.1/dist/cdn.min.js"></script>
         <script src="{{ mix src='/js/site.js' }}"></script>
+        {{ yield:scripts }}
     </body>
 </html>
